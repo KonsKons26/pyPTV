@@ -1,8 +1,6 @@
 from itertools import groupby
 from random import choice, sample
 
-from joblib import Parallel, delayed, cpu_count
-
 import numpy as np
 
 import pandas as pd
@@ -44,7 +42,7 @@ XKCD_COLORS = [
 ]
 
 
-class TrajectoryVisualiser:
+class PTV:
     """
     Class for visualizing molecular dynamics trajectories.
     """
