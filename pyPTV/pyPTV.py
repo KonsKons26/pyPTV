@@ -203,7 +203,7 @@ class PTV:
         rmsf, rmsf_error = Wrappers.rmsf(
             self.traj,
             atom_indices=atom_indices,
-            ref_atom_indices=atom_indices, # Superpose on selection
+            ref_atom_indices=atom_indices,
             n_blocks=n_blocks,
             error_metric=error_metric,
             precentered=False 
@@ -215,7 +215,6 @@ class PTV:
                 self.rmsf_error = rmsf_error
 
         # Plot
-        # Residue labeling (unchanged from your original code)
         selected_atoms = [
             self.traj.topology.atom(i)
             for i in atom_indices
