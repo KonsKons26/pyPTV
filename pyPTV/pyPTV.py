@@ -1055,7 +1055,7 @@ class PTV:
                 )[conv_window: -conv_window],
                 label=f"RMSD to {key}",
                 color=colors[key],
-        )
+            )
 
         plt.xlabel(f"Time ({self.time_units})")
         plt.ylabel("RMSD (nm)")
