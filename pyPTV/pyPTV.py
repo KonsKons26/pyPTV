@@ -167,8 +167,6 @@ class PTV:
         figsize: tuple[int, int] = (18, 8),
         selection: str = "protein",
         residue_label_rotation: int = 90,
-        n_blocks: int = 1,
-        error_metric: str = "sem",
     ) -> None:
         """
         Plots the root mean square fluctuation (RMSF) per atom.
@@ -200,19 +198,15 @@ class PTV:
         # Calculate RMSF using the modified wrapper
         # The wrapper now handles block averaging internally.
 
-        rmsf, rmsf_error = Wrappers.rmsf(
+        rmsf = Wrappers.rmsf(
             self.traj,
             atom_indices=atom_indices,
             ref_atom_indices=atom_indices,
-            n_blocks=n_blocks,
-            error_metric=error_metric,
             precentered=False 
         )
 
         if self.save_calculations:
             self.rmsf = rmsf
-            if rmsf_error is not None:
-                self.rmsf_error = rmsf_error
 
         # Plot
         selected_atoms = [
@@ -250,21 +244,8 @@ class PTV:
             rmsf,
             color=plot_color,
             linewidth=2,
-            label="Mean RMSF" if rmsf_error is not None else "RMSF"
+            label="RMSF"
         )
-        
-        # Plot the shaded error region if it was calculated
-        if rmsf_error is not None:
-            error_label = f"± 1 {error_metric.upper()}"
-            ax.fill_between(
-                x_values,
-                rmsf - rmsf_error,
-                rmsf + rmsf_error,
-                color=plot_color,
-                alpha=0.3,
-                label=error_label
-            )
-            ax.legend()
 
         ax.set_ylabel("RMSF (nm)")
         title = f"RMSF per Atom ({selection})"

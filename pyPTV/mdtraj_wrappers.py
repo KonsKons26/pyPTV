@@ -56,7 +56,7 @@ class Wrappers:
             parallel,
             precentered,
         )
-        return rmsf_vals, None
+        return rmsf_vals
 
     @staticmethod
     def compute_rg(
